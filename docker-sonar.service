@@ -1,0 +1,12 @@
+[Unit]
+Description=Docker - Sonarqube container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/local/bin/docker-compose restart sonarqube
+ExecStop=/usr/local/bin/docker-compose -t 2 sonarqube
+
+[Install]
+WantedBy=default.target
