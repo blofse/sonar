@@ -14,9 +14,9 @@ docker run --name sonar-postgres -e POSTGRES_USER=sonar -e POSTGRES_PASSWORD='**
 ```
 
 # How to use this image
-Run the following command:
+Run the following command, replacing *** with the same password as the pre-reqs section:
 ```
-docker run -d --name sonar-alpine-centos7 --link sonar-postgres:pgsonar -p 9000:9000 -e SONARQUBE_JDBC_USERNAME=sonar -e SONARQUBE_JDBC_PASSWORD='(abc123)' -e SONARQUBE_JDBC_URL=jdbc:postgresql://pgsonar:5432/sonar sonar-alpine-centos7
+docker run -d --name sonar-alpine-centos7 --link sonar-postgres:pgsonar -p 9000:9000 -e SONARQUBE_JDBC_USERNAME=sonar -e SONARQUBE_JDBC_PASSWORD='***' -e SONARQUBE_JDBC_URL=jdbc:postgresql://pgsonar:5432/sonar sonar-alpine-centos7
 ```
 
 # Running as a service
