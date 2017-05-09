@@ -1,8 +1,8 @@
 #!/bin/sh
 
 echo Stopping existing container
-docker stop $(docker ps -a -q  --filter ancestor=postgres)
-docker stop $(docker ps -a -q  --filter ancestor=sonar-alpine-centos7)
+docker stop sonar
+docker stop sonar-postgres
 
 echo Copying and running service
 yes | cp docker-sonar-postgres.service /etc/systemd/system/.
