@@ -1,5 +1,5 @@
 [Unit]
-Description=Docker - Sonarqube container
+Description=Docker - Postgres - Sonarqube container
 Requires=docker.service
 After=docker.service
 
