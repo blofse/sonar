@@ -1,12 +1,12 @@
 [Unit]
 Description=Docker - Sonarqube container
-Requires=docker.service
-After=docker.service
+Requires=docker-sonar-postgres.service
+After=docker-sonar-postgres.service
 
 [Service]
 Restart=always
-ExecStart=/usr/local/bin/docker-compose start sonarqube
-ExecStop=/usr/local/bin/docker-compose -t 2 sonarqube
+ExecStart=/usr/bin/docker start -a sonar-alpine-centos7
+ExecStop=/usr/bin/docker stop -t 2 sonar-alpine-centos7
 
 [Install]
 WantedBy=default.target

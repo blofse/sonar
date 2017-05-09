@@ -1,0 +1,12 @@
+[Unit]
+Description=Docker - Sonarqube container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker start -a sonar-postgres
+ExecStop=/usr/bin/docker stop -t 2 sonar-postgres
+
+[Install]
+WantedBy=default.target
