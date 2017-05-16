@@ -9,7 +9,7 @@ This is based heavily from [this git hub repo](https://github.com/SonarSource/do
 
 # Pre-req
 
-Before running this docker image, please [clone / download the repo](https://github.com/blofse/sonar-alpine-centos7, including the script files.
+Before running this docker image, please [clone / download the repo](https://github.com/blofse/sonar, including the script files.
 
 # How to use this image
 ## Initialise
@@ -19,8 +19,8 @@ Run the following command, replacing *** with your desired db password:
 ./initial_start '***'
 ```
 This will setup two containers: 
-* atlassian-bitbucket-mysql - a container to store your bb db data
-* atlassian-bitbucket - the container containing the bb server
+* sonar-postgres - a container to store your sonar db data
+* sonar - the container containing the sonar server
 
 ## (optional) setting up as a service
 

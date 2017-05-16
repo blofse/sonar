@@ -31,12 +31,9 @@ RUN gpg --batch --verify sonarqube.zip.asc sonarqube.zip
 # Setup sonar install
 RUN unzip sonarqube.zip
 RUN mkdir -p ${SONARQUBE_HOME}
-RUN cp -R sonarqube-$SONAR_VERSION/* ${SONARQUBE_HOME}/
-RUN rm sonarqube.zip*
-# RUN rm -fr ${SONARQUBE_HOME}/bin/*
-
-# RUN mkdir /opt
-# RUN cd /opt
+RUN cp -R sonarqube-${SONAR_VERSION}/* ${SONARQUBE_HOME}/
+RUN rm sonarqube.zip
+RUN rm -rf /sonarqube-${SONAR_VERSION}/*.*
 
 # Setup plugins
 RUN mkdir -p ${SONARQUBE_HOME}/extensions/plugins/
