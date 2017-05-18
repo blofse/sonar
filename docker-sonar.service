@@ -5,8 +5,8 @@ After=docker-sonar-postgres.service
 
 [Service]
 Restart=always
-ExecStart=/usr/bin/docker start -a sonar-alpine-centos7
-ExecStop=/usr/bin/docker stop -t 2 sonar-alpine-centos7
+ExecStart=/usr/bin/docker start -a sonar
+ExecStop=/usr/bin/docker stop -t 2 sonar
 
 [Install]
 WantedBy=default.target
