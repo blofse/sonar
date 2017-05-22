@@ -1,4 +1,4 @@
-# sonar
+# sonar - A docker image containing version 6.3.1 based on alpine linux, with postgres and Java, web and git plugins installed.
 A Docker container for Sonar, running apline but working for CentOS7 (also allows for restarting)
 This fixes the inability to restart the sonar image but also sorts the permissions out (generally for CentOS, untested on other distros and may still work).
 The intent is to use this image as a restartable service and run your sonar server.
