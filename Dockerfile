@@ -1,6 +1,6 @@
 FROM openjdk:8-alpine
 
-ENV SONAR_VERSION=6.3.1 \
+ENV SONAR_VERSION=7.0 \
     SONARQUBE_HOME=/opt/sonarqube \
     # Database configuration
     # Defaults to using H2
@@ -8,8 +8,8 @@ ENV SONAR_VERSION=6.3.1 \
     SONARQUBE_JDBC_PASSWORD=sonar \
     SONARQUBE_JDBC_URL= \
     SONAR_DOWNLOAD_URL=https://sonarsource.bintray.com/Distribution \
-    SONAR_JAVA_PLUGIN_VERSION=4.6.0.8784 \
-    SONAR_GITHUB_PLUGIN_VERSION=1.4.0.699 \
+    SONAR_JAVA_PLUGIN_VERSION=5.1.0.13090 \
+    SONAR_GITHUB_PLUGIN_VERSION=1.4.2.1027 \
     SONAR_WEB_PLUGIN=2.5.0.476
 
 RUN set -x
