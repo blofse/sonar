@@ -12,35 +12,22 @@ ENV SONAR_VERSION=7.0 \
     SONAR_GITHUB_PLUGIN_VERSION=1.4.2.1027 \
     SONAR_WEB_PLUGIN=2.5.0.476
 
-RUN set -x
-RUN apk add --no-cache gnupg 
-RUN apk add --no-cache unzip
-RUN apk add --no-cache libressl
-RUN apk add --no-cache wget
-
-# Download and gpg check the download
-# pub   2048R/D26468DE 2015-05-25
-#       Key fingerprint = F118 2E81 C792 9289 21DB  CAB4 CFCA 4A29 D264 68DE
-# uid                  sonarsource_deployer (Sonarsource Deployer) <infra@sonarsource.com>
-# sub   2048R/06855C1D 2015-05-25
-RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys F1182E81C792928921DBCAB4CFCA4A29D26468DE
-RUN wget -O sonarqube.zip --no-verbose ${SONAR_DOWNLOAD_URL}/sonarqube/sonarqube-${SONAR_VERSION}.zip
-RUN wget -O sonarqube.zip.asc --no-verbose ${SONAR_DOWNLOAD_URL}/sonarqube/sonarqube-${SONAR_VERSION}.zip.asc
-RUN gpg --batch --verify sonarqube.zip.asc sonarqube.zip
-
-# Setup sonar install
-RUN unzip sonarqube.zip
-RUN mkdir -p ${SONARQUBE_HOME}
-RUN cp -R sonarqube-${SONAR_VERSION}/* ${SONARQUBE_HOME}/
-RUN rm sonarqube.zip
-RUN rm -rf /sonarqube-${SONAR_VERSION}/*.*
-
-# Setup plugins
-RUN mkdir -p ${SONARQUBE_HOME}/extensions/plugins/
-RUN cd ${SONARQUBE_HOME}/extensions/plugins/
-RUN wget -O sonar-java-plugin-${SONAR_JAVA_PLUGIN_VERSION}.jar --no-verbose ${SONAR_DOWNLOAD_URL}/sonar-java-plugin/sonar-java-plugin-${SONAR_JAVA_PLUGIN_VERSION}.jar
-RUN wget -O sonar-web-plugin-${SONAR_WEB_PLUGIN}.jar --no-verbose ${SONAR_DOWNLOAD_URL}/sonar-web-plugin/sonar-web-plugin-${SONAR_WEB_PLUGIN}.jar
-RUN wget -O sonar-scm-git-plugin-${SONAR_GITHUB_PLUGIN_VERSION}.jar --no-verbose ${SONAR_DOWNLOAD_URL}/sonar-github-plugin/sonar-github-plugin-${SONAR_GITHUB_PLUGIN_VERSION}.jar
+RUN set -x \
+    && apk add --no-cache gnupg unzip libressl wget tzdata bash \
+    && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys F1182E81C792928921DBCAB4CFCA4A29D26468DE \
+    && wget -O sonarqube.zip --no-verbose "${SONAR_DOWNLOAD_URL}/sonarqube/sonarqube-${SONAR_VERSION}.zip" \
+    && wget -O sonarqube.zip.asc --no-verbose "${SONAR_DOWNLOAD_URL}/sonarqube/sonarqube-${SONAR_VERSION}.zip.asc" \
+    && gpg --batch --verify sonarqube.zip.asc sonarqube.zip \
+    && unzip sonarqube.zip \
+    && mkdir -p "${SONARQUBE_HOME}" \
+    && cp -R "sonarqube-${SONAR_VERSION}/*" "${SONARQUBE_HOME}/" \
+    && rm sonarqube.zip \
+    && rm -rf "/sonarqube-${SONAR_VERSION}/*.*" \
+    && mkdir -p "${SONARQUBE_HOME}/extensions/plugins/" \
+    && cd "${SONARQUBE_HOME}/extensions/plugins/" \
+    && wget -O sonar-java-plugin-${SONAR_JAVA_PLUGIN_VERSION}.jar --no-verbose "${SONAR_DOWNLOAD_URL}/sonar-java-plugin/sonar-java-plugin-${SONAR_JAVA_PLUGIN_VERSION}.jar" \
+    && get -O sonar-web-plugin-${SONAR_WEB_PLUGIN}.jar --no-verbose "${SONAR_DOWNLOAD_URL}/sonar-web-plugin/sonar-web-plugin-${SONAR_WEB_PLUGIN}.jar" \
+    && get -O sonar-scm-git-plugin-${SONAR_GITHUB_PLUGIN_VERSION}.jar --no-verbose "${SONAR_DOWNLOAD_URL}/sonar-github-plugin/sonar-github-plugin-${SONAR_GITHUB_PLUGIN_VERSION}.jar"
 
 # Http port
 EXPOSE 9000
