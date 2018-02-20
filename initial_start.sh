@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set +H
+
 if [[ $# -eq 0 ]] ; then
     echo 'Expecting one argument'
     exit 0
@@ -12,7 +14,7 @@ docker network create \
 docker run \
   --name sonar-postgres \
   -e POSTGRES_USER=sonar \
-  -e POSTGRES_PASSWORD="$1" \ 
+  -e POSTGRES_PASSWORD="$1" \
   -v sonar-postgres-data:/var/lib/postgresql/data \
   --net sonar-network \
   -d \
@@ -24,7 +26,7 @@ docker run \
   -e SONARQUBE_JDBC_USERNAME=sonar \
   -e SONARQUBE_JDBC_PASSWORD="$1" \
   -e SONARQUBE_JDBC_URL=jdbc:postgresql://sonar-postgres:5432/sonar \
-  --net sonar-network
+  --net sonar-network \
   -d \
   sonar
 

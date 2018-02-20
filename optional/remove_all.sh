@@ -28,6 +28,6 @@ echo Removing networks
 docker network rm sonar-network || true
 
 echo Removing docker image
-docker rmi sonar
+#docker rmi sonar
 
 echo Done!
